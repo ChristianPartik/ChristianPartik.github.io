@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3D Model Viewer</title>
+    <style>
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+      #slider-container {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas-container"></div>
+    <div id="slider-container">
+      <label for="slider">Rotate:</label>
+      <input type="range" min="0" max="360" value="0" id="slider" />
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // Create the scene and camera
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+      // Create the renderer and add it to the DOM
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById("canvas-container").appendChild(renderer.domElement);
+
+      // Create the geometry and material
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+      // Create the mesh and add it to the scene
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      // Set the camera position
+      camera.position.z = 5;
+
+      // Create the slider
+      const slider = document.getElementById("slider");
+
+      // Animate the scene
+      function animate() {
+        requestAnimationFrame(animate);
+        mesh.rotation.y += slider.value / 180 * Math.PI;
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
