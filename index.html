@@ -1,61 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>3D Model Viewer</title>
+    <title>Sketchfab 3D Model Viewer</title>
     <style>
-      canvas {
-        width: 50%;
-        height: 50%;
-      }
-      #slider-container {
-        margin-top: 10px;
+      #model-container {
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
   <body>
-    <div id="canvas-container"></div>
-    <div id="slider-container">
-      <label for="slider">Rotate:</label>
-      <input type="range" min="0" max="360" value="0" id="slider" />
+    <div id="model-container">
+      <iframe title="Boeing 787-9 CAD model" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/22ba9a06100a4e6480676970a5cb9e9e/embed"></iframe>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-      // Create the scene and camera
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-      // Create the renderer and add it to the DOM
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById("canvas-container").appendChild(renderer.domElement);
-
-      // Load the 3D model and apply a material to it
-      const loader = new THREE.GLTFLoader();
-      loader.load("model.gltf", function (gltf) {
-        const model = gltf.scene.children[0];
-        const material = new THREE.MeshStandardMaterial({
-          color: 0xffff12,
-          roughness: 0.5,
-          metalness: 0.5
-        });
-        model.material = material;
-        scene.add(model);
-      });
-
-      // Set the camera position
-      camera.position.z = 5;
-
-      // Create the slider
-      const slider = document.getElementById("slider");
-
-      // Animate the scene
-      function animate() {
-        requestAnimationFrame(animate);
-        model.rotation.y += slider.value / 180 * Math.PI;
-        renderer.render(scene, camera);
-      }
-
-      animate();
-    </script>
   </body>
 </html>
