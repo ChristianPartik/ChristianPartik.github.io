@@ -29,13 +29,18 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.getElementById("canvas-container").appendChild(renderer.domElement);
 
-      // Create the geometry and material
-      const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-
-      // Create the mesh and add it to the scene
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
+      // Load the 3D model and apply a material to it
+      const loader = new THREE.GLTFLoader();
+      loader.load("/Users/christianpartik/Documents/GitHub/ChristianPartik.github.io/model.gtlf", function (gltf) {
+        const model = gltf.scene.children[0];
+        const material = new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          roughness: 0.5,
+          metalness: 0.5
+        });
+        model.material = material;
+        scene.add(model);
+      });
 
       // Set the camera position
       camera.position.z = 5;
@@ -46,7 +51,7 @@
       // Animate the scene
       function animate() {
         requestAnimationFrame(animate);
-        mesh.rotation.y += slider.value / 180 * Math.PI;
+        model.rotation.y += slider.value / 180 * Math.PI;
         renderer.render(scene, camera);
       }
 
