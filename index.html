@@ -4,8 +4,8 @@
     <title>3D Model Viewer</title>
     <style>
       canvas {
-        width: 100%;
-        height: 100%;
+        width: 50%;
+        height: 50%;
       }
       #slider-container {
         margin-top: 10px;
@@ -31,7 +31,7 @@
 
       // Load the 3D model and apply a material to it
       const loader = new THREE.GLTFLoader();
-      loader.load("/Users/christianpartik/Documents/GitHub/ChristianPartik.github.io/potted_plant_01_4k.gfl", function (gltf) {
+      loader.load("/Users/christianpartik/Documents/GitHub/ChristianPartik.github.io/potted_plant_01_4k.gltf", function (gltf) {
         const model = gltf.scene.children[0];
         const material = new THREE.MeshStandardMaterial({
           color: 0xffffff,
