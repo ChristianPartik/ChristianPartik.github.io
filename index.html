@@ -31,7 +31,7 @@
 
       // Load the 3D model and apply a material to it
       const loader = new THREE.GLTFLoader();
-      loader.load("/Users/christianpartik/Documents/GitHub/ChristianPartik.github.io/potted_plant_01_4k.gltf", function (gltf) {
+      loader.load("/Users/christianpartik/Documents/GitHub/ChristianPartik.github.io/model.gltf", function (gltf) {
         const model = gltf.scene.children[0];
         const material = new THREE.MeshStandardMaterial({
           color: 0xffffff,
